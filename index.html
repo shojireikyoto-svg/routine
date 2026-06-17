@@ -39,7 +39,7 @@
       padding-bottom: calc(32px + env(safe-area-inset-bottom));
     }
 
-    /* ── Header ── */
+    /* Header */
     .header {
       background: var(--white);
       padding: 20px 20px 16px;
@@ -90,18 +90,10 @@
       margin-top: 6px;
     }
 
-    .progress-text {
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
+    .progress-text  { font-size: 12px; color: var(--text-secondary); }
+    .progress-count { font-size: 12px; font-weight: 600; color: var(--green-600); }
 
-    .progress-count {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--green-600);
-    }
-
-    /* ── Main ── */
+    /* Main */
     .main {
       padding: 16px;
       max-width: 480px;
@@ -117,7 +109,7 @@
       margin: 8px 4px 8px;
     }
 
-    /* ── Log ── */
+    /* Log */
     .log-container {
       background: var(--white);
       border-radius: 14px;
@@ -146,44 +138,19 @@
       width: 32px;
     }
 
-    .log-day-num {
-      font-size: 10px;
-      color: var(--text-muted);
-      font-weight: 500;
-      line-height: 1;
-    }
+    .log-day-num  { font-size: 10px; color: var(--text-muted); font-weight: 500; line-height: 1; }
+    .log-circle   { width: 22px; height: 22px; border-radius: 50%; background: #eaeeea; transition: background 0.3s ease; }
+    .log-circle.lv0 { background: #dde6dd; }
+    .log-circle.lv1 { background: #c2dfc2; }
+    .log-circle.lv2 { background: var(--green-300); }
+    .log-circle.lv3 { background: var(--green-400); }
+    .log-circle.lv4 { background: var(--green-500); }
+    .log-weekday  { font-size: 9px; color: var(--text-muted); line-height: 1; }
 
-    .log-circle {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #eaeeea;
-      transition: background 0.3s ease;
-    }
+    .log-day.today .log-day-num { color: var(--green-600); font-weight: 700; }
+    .log-day.today .log-circle  { outline: 2px solid var(--green-500); outline-offset: 2px; }
 
-    .log-circle.lv0  { background: #dde6dd; }
-    .log-circle.lv1  { background: #c2dfc2; }
-    .log-circle.lv2  { background: var(--green-300); }
-    .log-circle.lv3  { background: var(--green-400); }
-    .log-circle.lv4  { background: var(--green-500); }
-
-    .log-weekday {
-      font-size: 9px;
-      color: var(--text-muted);
-      line-height: 1;
-    }
-
-    .log-day.today .log-day-num {
-      color: var(--green-600);
-      font-weight: 700;
-    }
-
-    .log-day.today .log-circle {
-      outline: 2px solid var(--green-500);
-      outline-offset: 2px;
-    }
-
-    /* ── Tasks ── */
+    /* Tasks */
     .task-list {
       display: flex;
       flex-direction: column;
@@ -197,25 +164,16 @@
       padding: 12px 14px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       box-shadow: 0 1px 4px var(--shadow);
       user-select: none;
       transition: transform 0.18s ease, opacity 0.15s ease;
       will-change: transform;
     }
 
-    .task-item.done {
-      opacity: 0.5;
-    }
-
-    .task-item.done .task-name {
-      text-decoration: line-through;
-      color: var(--text-muted);
-    }
-
-    .task-item.is-dragging {
-      visibility: hidden;
-    }
+    .task-item.done { opacity: 0.5; }
+    .task-item.done .task-name { text-decoration: line-through; color: var(--text-muted); }
+    .task-item.is-dragging { visibility: hidden; }
 
     /* Drag handle */
     .drag-handle {
@@ -228,6 +186,43 @@
       flex-shrink: 0;
       touch-action: none;
       cursor: grab;
+    }
+
+    /* Time tag chip */
+    .time-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 100px;
+      flex-shrink: 0;
+      letter-spacing: 0.2px;
+    }
+    .time-tag.asa  { background: #fff3e0; color: #bf5a00; }
+    .time-tag.hiru { background: #e3f2fd; color: #1255a0; }
+    .time-tag.yoru { background: #ede7f6; color: #4527a0; }
+
+    /* Task name */
+    .task-name {
+      flex: 1;
+      font-size: 15px;
+      color: var(--text-primary);
+      line-height: 1.35;
+      min-width: 0;
+      word-break: break-all;
+    }
+
+    /* Inline edit input */
+    .task-name-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 15px;
+      color: var(--text-primary);
+      background: transparent;
+      font-family: inherit;
+      padding: 0;
+      min-width: 0;
+      border-bottom: 1.5px solid var(--green-400);
     }
 
     /* Check button */
@@ -246,29 +241,11 @@
       -webkit-appearance: none;
     }
 
-    .check-btn.checked {
-      background: var(--green-500);
-      border-color: var(--green-500);
-    }
+    .check-btn.checked { background: var(--green-500); border-color: var(--green-500); }
+    .check-btn svg { opacity: 0; transition: opacity 0.15s ease; }
+    .check-btn.checked svg { opacity: 1; }
 
-    .check-btn svg {
-      opacity: 0;
-      transition: opacity 0.15s ease;
-    }
-
-    .check-btn.checked svg {
-      opacity: 1;
-    }
-
-    .task-name {
-      flex: 1;
-      font-size: 15px;
-      color: var(--text-primary);
-      line-height: 1.35;
-      min-width: 0;
-      word-break: break-all;
-    }
-
+    /* Delete button */
     .delete-btn {
       width: 28px;
       height: 28px;
@@ -285,12 +262,9 @@
       -webkit-appearance: none;
     }
 
-    .delete-btn:active {
-      color: #e05555;
-      background: #fff0f0;
-    }
+    .delete-btn:active { color: #e05555; background: #fff0f0; }
 
-    /* Ghost (floating during drag) */
+    /* Ghost (drag) */
     .task-ghost {
       position: fixed;
       z-index: 999;
@@ -300,24 +274,16 @@
       box-shadow: 0 10px 28px rgba(60, 140, 60, 0.22);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       padding: 12px 14px;
       transform: scale(1.03);
     }
 
     /* Empty state */
-    .empty-state {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--text-muted);
-    }
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+    .empty-state p { font-size: 14px; margin-top: 10px; }
 
-    .empty-state p {
-      font-size: 14px;
-      margin-top: 10px;
-    }
-
-    /* Add form */
+    /* Add area */
     .add-area {
       margin-top: 20px;
       background: var(--white);
@@ -331,9 +297,7 @@
       transition: border-color 0.2s;
     }
 
-    .add-area:focus-within {
-      border-color: var(--green-400);
-    }
+    .add-area:focus-within { border-color: var(--green-400); }
 
     .add-input {
       flex: 1;
@@ -364,10 +328,39 @@
       -webkit-appearance: none;
     }
 
-    .add-btn:active {
-      background: var(--green-600);
-      transform: scale(0.95);
+    .add-btn:active { background: var(--green-600); transform: scale(0.95); }
+
+    /* Tag selector row */
+    .tag-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding: 8px 2px 0;
     }
+
+    .tag-row-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .tag-btn {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: 100px;
+      border: 1.5px solid var(--green-200);
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-muted);
+      transition: all 0.15s;
+      -webkit-appearance: none;
+      font-family: inherit;
+    }
+
+    .tag-btn[data-tag="朝"].active  { background: #fff3e0; color: #bf5a00; border-color: #e65100; }
+    .tag-btn[data-tag="昼"].active  { background: #e3f2fd; color: #1255a0; border-color: #1976d2; }
+    .tag-btn[data-tag="夜"].active  { background: #ede7f6; color: #4527a0; border-color: #7e57c2; }
 
     /* Reset button */
     .reset-btn {
@@ -388,7 +381,7 @@
 
     .reset-btn:active { background: var(--green-200); }
 
-    /* Celebration */
+    /* All-done banner */
     .all-done-banner {
       background: linear-gradient(135deg, var(--green-400), var(--green-500));
       color: white;
@@ -399,24 +392,20 @@
       animation: fadeIn 0.4s ease;
     }
 
-    .all-done-banner .emoji {
-      font-size: 28px;
-      display: block;
-      margin-bottom: 4px;
-    }
+    .all-done-banner .emoji { font-size: 28px; display: block; margin-bottom: 4px; }
+    .all-done-banner p { font-size: 15px; font-weight: 600; }
 
-    .all-done-banner p {
-      font-size: 15px;
-      font-weight: 600;
+    /* Confetti canvas */
+    #confettiCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1000;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(6px); }
       to   { opacity: 1; transform: translateY(0); }
     }
   </style>
@@ -427,7 +416,6 @@
       var c = document.createElement('canvas');
       c.width = c.height = 180;
       var ctx = c.getContext('2d');
-      // 背景グラデーション
       var g = ctx.createLinearGradient(0,0,180,180);
       g.addColorStop(0,'#7bbf7b'); g.addColorStop(1,'#3d8b3d');
       ctx.fillStyle = g; ctx.fillRect(0,0,180,180);
@@ -452,15 +440,11 @@
         ctx.fillStyle='rgba(255,255,255,'+alpha+')';
         rr(80,cy-7,58,13,6.5); ctx.fill();
       }
-      // 行1: 未チェック
       ctx.beginPath(); ctx.arc(54,58,15,0,Math.PI*2);
       ctx.strokeStyle='rgba(255,255,255,0.45)'; ctx.lineWidth=3.5; ctx.stroke();
       ctx.fillStyle='rgba(255,255,255,0.45)'; rr(80,51,58,13,6.5); ctx.fill();
-      // 行2: チェック済み（明）
       check(90, 1);
-      // 行3: チェック済み（やや透明）
       check(122, 0.85);
-      // apple-touch-iconとして設定
       var l = document.createElement('link');
       l.rel='apple-touch-icon'; l.href=c.toDataURL('image/png');
       document.head.appendChild(l);
@@ -468,6 +452,8 @@
   </script>
 </head>
 <body>
+
+<canvas id="confettiCanvas"></canvas>
 
 <div class="header">
   <div class="header-top">
@@ -496,7 +482,9 @@
     <div class="log-scroll" id="logScroll"></div>
   </div>
 
-  <div class="section-label" style="margin-top:16px">タスク</div>
+  <div class="section-label" style="margin-top:16px">タスク
+    <span style="font-size:10px;font-weight:400;color:var(--text-muted);margin-left:6px;text-transform:none;letter-spacing:0">長押しで名前を編集</span>
+  </div>
   <div class="task-list" id="taskList"></div>
 
   <div class="add-area">
@@ -507,6 +495,13 @@
         <path d="M9 3.5v11M3.5 9h11" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
       </svg>
     </button>
+  </div>
+
+  <div class="tag-row">
+    <span class="tag-row-label">時間帯</span>
+    <button class="tag-btn" data-tag="朝">朝</button>
+    <button class="tag-btn" data-tag="昼">昼</button>
+    <button class="tag-btn" data-tag="夜">夜</button>
   </div>
 
   <button class="reset-btn" id="resetBtn">チェックをリセット</button>
@@ -523,7 +518,7 @@
   //  Utilities
   // ─────────────────────────────────────────
   function todayStr() {
-    return new Date().toLocaleDateString('ja-JP'); // e.g. "2026/6/10"
+    return new Date().toLocaleDateString('ja-JP');
   }
 
   function uid() {
@@ -532,6 +527,13 @@
 
   function esc(s) {
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function tagClass(tag) {
+    if (tag === '朝') return 'asa';
+    if (tag === '昼') return 'hiru';
+    if (tag === '夜') return 'yoru';
+    return '';
   }
 
   // ─────────────────────────────────────────
@@ -546,7 +548,6 @@
     localStorage.setItem(LOG_KEY, JSON.stringify(logs));
   }
 
-  // Record today's completion snapshot
   function recordTodayLog() {
     const total = state.tasks.length;
     if (total === 0) return;
@@ -563,9 +564,9 @@
     return {
       date: todayStr(),
       tasks: [
-        { id: uid(), name: '朝の準備', done: false },
-        { id: uid(), name: '運動・ストレッチ', done: false },
-        { id: uid(), name: '水を飲む', done: false },
+        { id: uid(), name: '朝の準備',      done: false, tag: '朝' },
+        { id: uid(), name: '運動・ストレッチ', done: false, tag: null },
+        { id: uid(), name: '水を飲む',       done: false, tag: null },
       ]
     };
   }
@@ -576,15 +577,15 @@
       if (!raw) return defaultState();
       const s = JSON.parse(raw);
       if (s.date !== todayStr()) {
-        // Save yesterday's final log before resetting
         const logs = loadLogs();
         const done = s.tasks.filter(t => t.done).length;
         if (s.tasks.length > 0) logs[s.date] = { done, total: s.tasks.length };
         saveLogs(logs);
-        // New day: reset checks
         s.tasks = s.tasks.map(t => ({ ...t, done: false }));
         s.date  = todayStr();
       }
+      // Backward compat: ensure tag field exists
+      s.tasks = s.tasks.map(t => ({ tag: null, ...t }));
       return s;
     } catch {
       return defaultState();
@@ -596,6 +597,56 @@
   }
 
   let state = loadState();
+
+  // ─────────────────────────────────────────
+  //  Confetti
+  // ─────────────────────────────────────────
+  let confettiShown = false;
+
+  function launchConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#5aa55a','#7bbf7b','#a8d5a8','#ffd700','#ff8a65','#4db6ac','#ba68c8','#f06292'];
+    const particles = Array.from({ length: 80 }, () => ({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * canvas.height * 0.4,
+      vy: 1.8 + Math.random() * 3,
+      vx: (Math.random() - 0.5) * 2.5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      w: 6 + Math.random() * 8,
+      h: 4 + Math.random() * 5,
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.18
+    }));
+
+    let frame = 0;
+    const maxFrames = 160;
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rotation += p.rotSpeed;
+        p.vy += 0.04;
+        const alpha = frame > 110 ? 1 - (frame - 110) / 50 : 1;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.globalAlpha = Math.max(0, alpha);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+      frame++;
+      if (frame < maxFrames) requestAnimationFrame(animate);
+      else ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    animate();
+  }
 
   // ─────────────────────────────────────────
   //  Render
@@ -618,21 +669,28 @@
     const total = state.tasks.length;
     const done  = state.tasks.filter(t => t.done).length;
     const pct   = total === 0 ? 0 : Math.round(done / total * 100);
-    document.getElementById('progressBar').style.width  = pct + '%';
+    document.getElementById('progressBar').style.width   = pct + '%';
     document.getElementById('progressCount').textContent = `${done} / ${total}`;
     document.getElementById('progressText').textContent  = pct === 100 ? '全て完了！' : '今日のルーティーン';
-    document.getElementById('allDoneBanner').style.display = (total > 0 && done === total) ? 'block' : 'none';
+
+    const allDone = total > 0 && done === total;
+    document.getElementById('allDoneBanner').style.display = allDone ? 'block' : 'none';
+
+    if (allDone && !confettiShown) {
+      confettiShown = true;
+      setTimeout(launchConfetti, 300);
+    } else if (!allDone) {
+      confettiShown = false;
+    }
   }
 
-  // ── Log visualization ──
   function renderLogs() {
     const logs   = loadLogs();
     const scroll = document.getElementById('logScroll');
     scroll.innerHTML = '';
 
-    const today = new Date();
-    const DAYS  = 5;
-
+    const today    = new Date();
+    const DAYS     = 5;
     const WEEKDAYS = ['日','月','火','水','木','金','土'];
 
     for (let i = DAYS - 1; i >= 0; i--) {
@@ -642,15 +700,14 @@
       const log     = logs[dateKey];
       const isToday = i === 0;
 
-      // Pick color level
-      let lvClass = ''; // no data
+      let lvClass = '';
       if (log && log.total > 0) {
         const ratio = log.done / log.total;
-        if      (ratio === 0)   lvClass = 'lv0';
-        else if (ratio < 0.25)  lvClass = 'lv1';
-        else if (ratio < 0.5)   lvClass = 'lv2';
-        else if (ratio < 1)     lvClass = 'lv3';
-        else                    lvClass = 'lv4';
+        if      (ratio === 0)  lvClass = 'lv0';
+        else if (ratio < 0.25) lvClass = 'lv1';
+        else if (ratio < 0.5)  lvClass = 'lv2';
+        else if (ratio < 1)    lvClass = 'lv3';
+        else                   lvClass = 'lv4';
       }
 
       const cell = document.createElement('div');
@@ -663,11 +720,9 @@
       scroll.appendChild(cell);
     }
 
-    // Scroll to rightmost (today)
     scroll.scrollLeft = scroll.scrollWidth;
   }
 
-  // ── Task list ──
   function renderTasks() {
     const list = document.getElementById('taskList');
     list.innerHTML = '';
@@ -686,9 +741,14 @@
 
     state.tasks.forEach(task => {
       const el = document.createElement('div');
-      el.className   = 'task-item' + (task.done ? ' done' : '');
-      el.dataset.id  = task.id;
-      el.innerHTML   = `
+      el.className  = 'task-item' + (task.done ? ' done' : '');
+      el.dataset.id = task.id;
+
+      const tagHtml = task.tag
+        ? `<span class="time-tag ${tagClass(task.tag)}">${task.tag}</span>`
+        : '';
+
+      el.innerHTML = `
         <div class="drag-handle" data-drag="${task.id}" aria-label="並び替え">
           <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
             <rect y="0"  width="16" height="2" rx="1" fill="currentColor"/>
@@ -696,6 +756,7 @@
             <rect y="10" width="16" height="2" rx="1" fill="currentColor"/>
           </svg>
         </div>
+        ${tagHtml}
         <span class="task-name">${esc(task.name)}</span>
         <button class="check-btn ${task.done ? 'checked' : ''}" data-check="${task.id}" aria-label="完了">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -708,18 +769,59 @@
           </svg>
         </button>
       `;
+
       list.appendChild(el);
+
+      // Bind check / delete
+      el.querySelector('[data-check]').addEventListener('click', () => toggleTask(task.id));
+      el.querySelector('[data-del]').addEventListener('click', () => deleteTask(task.id));
+
+      // Bind drag
+      el.querySelector('[data-drag]').addEventListener('touchstart', onDragStart, { passive: false });
+
+      // Long press to edit (on name area, not buttons/handle)
+      let pressTimer = null;
+      el.addEventListener('touchstart', e => {
+        if (e.target.closest('[data-check],[data-del],[data-drag]')) return;
+        pressTimer = setTimeout(() => startEdit(task.id), 600);
+      }, { passive: true });
+      el.addEventListener('touchend',   () => clearTimeout(pressTimer));
+      el.addEventListener('touchmove',  () => clearTimeout(pressTimer));
+      el.addEventListener('touchcancel',() => clearTimeout(pressTimer));
     });
+  }
 
-    // Bind buttons
-    list.querySelectorAll('[data-check]').forEach(btn =>
-      btn.addEventListener('click', () => toggleTask(btn.dataset.check)));
-    list.querySelectorAll('[data-del]').forEach(btn =>
-      btn.addEventListener('click', () => deleteTask(btn.dataset.del)));
+  // ─────────────────────────────────────────
+  //  Inline edit (long press)
+  // ─────────────────────────────────────────
+  function startEdit(id) {
+    const t = state.tasks.find(t => t.id === id);
+    if (!t) return;
+    const el = document.querySelector(`.task-item[data-id="${id}"]`);
+    if (!el) return;
+    const nameSpan = el.querySelector('.task-name');
+    if (!nameSpan) return;
 
-    // Bind drag handles
-    list.querySelectorAll('[data-drag]').forEach(handle => {
-      handle.addEventListener('touchstart', onDragStart, { passive: false });
+    // Vibrate feedback (if supported)
+    if (navigator.vibrate) navigator.vibrate(40);
+
+    const input = document.createElement('input');
+    input.className = 'task-name-input';
+    input.value = t.name;
+    nameSpan.replaceWith(input);
+    input.focus();
+    input.select();
+
+    function save() {
+      const newName = input.value.trim();
+      if (newName) t.name = newName;
+      render();
+    }
+
+    input.addEventListener('blur', save);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter')  { e.preventDefault(); input.blur(); }
+      if (e.key === 'Escape') { input.value = t.name; input.blur(); }
     });
   }
 
@@ -737,10 +839,15 @@
     render();
   }
 
+  let selectedTag = null;
+
   function addTask(name) {
     name = name.trim();
     if (!name) return;
-    state.tasks.push({ id: uid(), name, done: false });
+    state.tasks.push({ id: uid(), name, done: false, tag: selectedTag });
+    // Reset tag selection
+    selectedTag = null;
+    document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
     render();
   }
 
@@ -761,7 +868,6 @@
     const srcRect  = srcEl.getBoundingClientRect();
     const touchY   = e.touches[0].clientY;
 
-    // Ghost element
     const ghost = document.createElement('div');
     ghost.className = 'task-ghost';
     ghost.style.left  = srcRect.left + 'px';
@@ -770,10 +876,8 @@
     ghost.innerHTML   = srcEl.innerHTML;
     document.body.appendChild(ghost);
 
-    // Hide source
     srcEl.classList.add('is-dragging');
 
-    // Store original rects
     const origRects = allItems.map(el => el.getBoundingClientRect());
 
     drag = {
@@ -781,7 +885,7 @@
       ghost, srcEl, allItems, origRects,
       touchOffsetY: touchY - srcRect.top,
       toIdx: fromIdx,
-      itemH: srcRect.height + 8   // height + gap
+      itemH: srcRect.height + 8
     };
   }
 
@@ -790,16 +894,13 @@
     e.preventDefault();
 
     const touchY = e.touches[0].clientY;
-
-    // Move ghost
     drag.ghost.style.top = (touchY - drag.touchOffsetY) + 'px';
 
-    // Determine toIdx from touch position vs. original rects of non-source items
     const nonSource = drag.allItems
       .map((el, i) => ({ i, rect: drag.origRects[i] }))
       .filter(x => x.i !== drag.fromIdx);
 
-    let toIdx = nonSource.length; // default: after all
+    let toIdx = nonSource.length;
     for (let j = 0; j < nonSource.length; j++) {
       const mid = nonSource[j].rect.top + nonSource[j].rect.height / 2;
       if (touchY < mid) { toIdx = j; break; }
@@ -816,18 +917,13 @@
 
   function applyDragTransforms() {
     if (!drag) return;
-    const { allItems, origRects, fromIdx, toIdx, itemH } = drag;
+    const { allItems, fromIdx, toIdx, itemH } = drag;
 
-    // Non-source items in order (filtered)
     const ns = allItems
       .map((el, i) => ({ el, i }))
       .filter(x => x.i !== fromIdx);
 
     ns.forEach(({ el }, j) => {
-      // j  = index in filtered (non-source) array
-      // toIdx = insertion point in filtered array
-      // fromIdx = original full index of source
-      // shift = ((j >= toIdx ? 1 : 0) - (j >= fromIdx ? 1 : 0)) * itemH
       const s = ((j >= toIdx ? 1 : 0) - (j >= fromIdx ? 1 : 0)) * itemH;
       el.style.transition = 'transform 0.18s ease';
       el.style.transform  = s !== 0 ? `translateY(${s}px)` : '';
@@ -837,7 +933,6 @@
   function endDrag() {
     if (!drag) return;
 
-    // Reset transforms
     drag.allItems.forEach(el => {
       el.style.transform  = '';
       el.style.transition = '';
@@ -845,7 +940,6 @@
     drag.srcEl.classList.remove('is-dragging');
     drag.ghost.remove();
 
-    // Commit new order
     if (drag.toIdx !== drag.fromIdx) {
       const tasks   = [...state.tasks];
       const [moved] = tasks.splice(drag.fromIdx, 1);
@@ -877,6 +971,20 @@
   document.getElementById('resetBtn').addEventListener('click', () => {
     state.tasks = state.tasks.map(t => ({ ...t, done: false }));
     render();
+  });
+
+  document.querySelectorAll('.tag-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag;
+      if (selectedTag === tag) {
+        selectedTag = null;
+        btn.classList.remove('active');
+      } else {
+        selectedTag = tag;
+        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+    });
   });
 
   // ─────────────────────────────────────────
