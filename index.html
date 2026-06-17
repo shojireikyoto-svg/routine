@@ -9,33 +9,19 @@
   <meta name="theme-color" content="#5aa55a">
   <title>ルーティーン</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     :root {
-      --green-100: #f0f9f0;
-      --green-200: #d6efd6;
-      --green-300: #a8d5a8;
-      --green-400: #7bbf7b;
-      --green-500: #5aa55a;
-      --green-600: #3d8b3d;
-      --text-primary: #2d4a2d;
-      --text-secondary: #5a7a5a;
-      --text-muted: #8faa8f;
-      --white: #ffffff;
-      --shadow: rgba(90, 165, 90, 0.15);
+      --g100: #f0f9f0; --g200: #d6efd6; --g300: #a8d5a8;
+      --g400: #7bbf7b; --g500: #5aa55a; --g600: #3d8b3d;
+      --tp: #2d4a2d; --ts: #5a7a5a; --tm: #8faa8f;
+      --white: #ffffff; --shadow: rgba(90,165,90,0.15);
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Helvetica Neue', sans-serif;
-      background: var(--green-100);
-      color: var(--text-primary);
-      min-height: 100vh;
-      min-height: -webkit-fill-available;
+      background: var(--g100); color: var(--tp);
+      min-height: 100vh; min-height: -webkit-fill-available;
       padding-bottom: calc(32px + env(safe-area-inset-bottom));
     }
 
@@ -44,364 +30,207 @@
       background: var(--white);
       padding: 20px 20px 16px;
       padding-top: calc(20px + env(safe-area-inset-top));
-      border-bottom: 1px solid var(--green-200);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      border-bottom: 1px solid var(--g200);
+      position: sticky; top: 0; z-index: 10;
     }
-
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-
-    .title {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--green-600);
-      letter-spacing: -0.3px;
-    }
-
-    .date {
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-
-    .progress-bar-wrap {
-      background: var(--green-200);
-      border-radius: 100px;
-      height: 6px;
-      overflow: hidden;
-    }
-
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--green-400), var(--green-500));
-      border-radius: 100px;
-      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 6px;
-    }
-
-    .progress-text  { font-size: 12px; color: var(--text-secondary); }
-    .progress-count { font-size: 12px; font-weight: 600; color: var(--green-600); }
+    .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .title { font-size: 22px; font-weight: 700; color: var(--g600); letter-spacing: -0.3px; }
+    .date  { font-size: 13px; color: var(--ts); }
+    .pbar-wrap { background: var(--g200); border-radius: 100px; height: 6px; overflow: hidden; }
+    .pbar { height: 100%; background: linear-gradient(90deg, var(--g400), var(--g500)); border-radius: 100px; transition: width .4s cubic-bezier(.4,0,.2,1); }
+    .pbar-label { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+    .pbar-text  { font-size: 12px; color: var(--ts); }
+    .pbar-count { font-size: 12px; font-weight: 600; color: var(--g600); }
 
     /* Main */
-    .main {
-      padding: 16px;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      margin: 8px 4px 8px;
-    }
+    .main { padding: 16px; max-width: 480px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 600; color: var(--tm); letter-spacing: .8px; text-transform: uppercase; margin: 8px 4px 8px; }
 
     /* Log */
-    .log-container {
-      background: var(--white);
-      border-radius: 14px;
-      padding: 12px 0 10px;
-      box-shadow: 0 1px 4px var(--shadow);
-      overflow: hidden;
-    }
-
-    .log-scroll {
-      display: flex;
-      gap: 5px;
-      overflow-x: auto;
-      padding: 0 14px;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-
+    .log-box { background: var(--white); border-radius: 14px; padding: 12px 0 10px; box-shadow: 0 1px 4px var(--shadow); overflow: hidden; }
+    .log-scroll { display: flex; gap: 5px; overflow-x: auto; padding: 0 14px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
     .log-scroll::-webkit-scrollbar { display: none; }
+    .log-day { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; width: 32px; }
+    .log-n  { font-size: 10px; color: var(--tm); font-weight: 500; line-height: 1; }
+    .log-c  { width: 22px; height: 22px; border-radius: 50%; background: #eaeeea; transition: background .3s; }
+    .log-c.lv0 { background: #dde6dd; }
+    .log-c.lv1 { background: #c2dfc2; }
+    .log-c.lv2 { background: var(--g300); }
+    .log-c.lv3 { background: var(--g400); }
+    .log-c.lv4 { background: var(--g500); }
+    .log-w  { font-size: 9px; color: var(--tm); line-height: 1; }
+    .log-day.today .log-n { color: var(--g600); font-weight: 700; }
+    .log-day.today .log-c { outline: 2px solid var(--g500); outline-offset: 2px; }
 
-    .log-day {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      flex-shrink: 0;
-      width: 32px;
+    /* Time section headers */
+    .time-section-header {
+      display: flex; align-items: center; gap: 8px;
+      margin: 16px 2px 8px; font-size: 12px; font-weight: 700;
+      color: var(--ts); letter-spacing: .4px;
+    }
+    .time-section-header:first-child { margin-top: 0; }
+    .time-section-header::after {
+      content: ''; flex: 1; height: 1px; background: var(--g200);
+    }
+    .time-section-header .sec-count {
+      font-size: 10px; font-weight: 500; color: var(--tm);
+      background: var(--g200); border-radius: 100px; padding: 1px 6px;
     }
 
-    .log-day-num  { font-size: 10px; color: var(--text-muted); font-weight: 500; line-height: 1; }
-    .log-circle   { width: 22px; height: 22px; border-radius: 50%; background: #eaeeea; transition: background 0.3s ease; }
-    .log-circle.lv0 { background: #dde6dd; }
-    .log-circle.lv1 { background: #c2dfc2; }
-    .log-circle.lv2 { background: var(--green-300); }
-    .log-circle.lv3 { background: var(--green-400); }
-    .log-circle.lv4 { background: var(--green-500); }
-    .log-weekday  { font-size: 9px; color: var(--text-muted); line-height: 1; }
-
-    .log-day.today .log-day-num { color: var(--green-600); font-weight: 700; }
-    .log-day.today .log-circle  { outline: 2px solid var(--green-500); outline-offset: 2px; }
-
-    /* Tasks */
-    .task-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      position: relative;
-    }
+    /* Task list */
+    .task-list { display: flex; flex-direction: column; gap: 8px; position: relative; }
 
     .task-item {
-      background: var(--white);
-      border-radius: 14px;
-      padding: 12px 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 1px 4px var(--shadow);
-      user-select: none;
-      transition: transform 0.18s ease, opacity 0.15s ease;
-      will-change: transform;
+      background: var(--white); border-radius: 14px; padding: 12px 14px;
+      display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 1px 4px var(--shadow); user-select: none;
+      transition: transform .18s ease, opacity .15s ease; will-change: transform;
     }
-
-    .task-item.done { opacity: 0.5; }
-    .task-item.done .task-name { text-decoration: line-through; color: var(--text-muted); }
+    .task-item.done { opacity: .5; }
+    .task-item.done .task-name { text-decoration: line-through; color: var(--tm); }
     .task-item.is-dragging { visibility: hidden; }
 
-    /* Drag handle */
     .drag-handle {
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--green-300);
-      flex-shrink: 0;
-      touch-action: none;
-      cursor: grab;
+      width: 22px; height: 22px; display: flex; align-items: center;
+      justify-content: center; color: var(--g300); flex-shrink: 0;
+      touch-action: none; cursor: grab;
     }
 
-    /* Time tag chip */
+    /* Time tag chip — tappable */
     .time-tag {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 100px;
-      flex-shrink: 0;
-      letter-spacing: 0.2px;
+      font-size: 10px; font-weight: 700; padding: 3px 8px;
+      border-radius: 100px; flex-shrink: 0; cursor: pointer;
+      transition: opacity .15s; letter-spacing: .2px;
     }
+    .time-tag:active { opacity: .7; }
     .time-tag.asa  { background: #fff3e0; color: #bf5a00; }
     .time-tag.hiru { background: #e3f2fd; color: #1255a0; }
     .time-tag.yoru { background: #ede7f6; color: #4527a0; }
+    .time-tag.none { background: var(--g100); color: var(--tm); border: 1.5px dashed var(--g300); }
 
-    /* Task name */
     .task-name {
-      flex: 1;
-      font-size: 15px;
-      color: var(--text-primary);
-      line-height: 1.35;
-      min-width: 0;
-      word-break: break-all;
+      flex: 1; font-size: 15px; color: var(--tp);
+      line-height: 1.35; min-width: 0; word-break: break-all;
     }
-
-    /* Inline edit input */
     .task-name-input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 15px;
-      color: var(--text-primary);
-      background: transparent;
-      font-family: inherit;
-      padding: 0;
-      min-width: 0;
-      border-bottom: 1.5px solid var(--green-400);
+      flex: 1; border: none; outline: none; font-size: 15px;
+      color: var(--tp); background: transparent; font-family: inherit;
+      padding: 0; min-width: 0; border-bottom: 1.5px solid var(--g400);
     }
 
-    /* Check button */
     .check-btn {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      border: 2px solid var(--green-300);
-      background: transparent;
-      cursor: pointer;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-      -webkit-appearance: none;
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 2px solid var(--g300); background: transparent;
+      cursor: pointer; flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; transition: all .2s; -webkit-appearance: none;
     }
-
-    .check-btn.checked { background: var(--green-500); border-color: var(--green-500); }
-    .check-btn svg { opacity: 0; transition: opacity 0.15s ease; }
+    .check-btn.checked { background: var(--g500); border-color: var(--g500); }
+    .check-btn svg { opacity: 0; transition: opacity .15s; }
     .check-btn.checked svg { opacity: 1; }
 
-    /* Delete button */
-    .delete-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      transition: color 0.15s, background 0.15s;
-      flex-shrink: 0;
-      -webkit-appearance: none;
+    .del-btn {
+      width: 28px; height: 28px; border-radius: 50%; border: none;
+      background: transparent; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; color: var(--tm); transition: color .15s, background .15s;
+      flex-shrink: 0; -webkit-appearance: none;
     }
+    .del-btn:active { color: #e05555; background: #fff0f0; }
 
-    .delete-btn:active { color: #e05555; background: #fff0f0; }
+    /* Tag picker popup */
+    .tag-picker {
+      position: fixed; z-index: 2000;
+      background: var(--white); border-radius: 14px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+      padding: 8px; display: flex; gap: 6px;
+      animation: popIn .15s ease;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.9) translateY(-4px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .tp-btn {
+      font-size: 12px; font-weight: 700; padding: 6px 12px;
+      border-radius: 10px; border: none; cursor: pointer;
+      font-family: inherit; transition: opacity .1s; -webkit-appearance: none;
+    }
+    .tp-btn:active { opacity: .7; }
+    .tp-btn.asa  { background: #fff3e0; color: #bf5a00; }
+    .tp-btn.hiru { background: #e3f2fd; color: #1255a0; }
+    .tp-btn.yoru { background: #ede7f6; color: #4527a0; }
+    .tp-btn.none { background: var(--g100); color: var(--tm); }
+    .picker-overlay {
+      position: fixed; inset: 0; z-index: 1999; background: transparent;
+    }
 
     /* Ghost (drag) */
     .task-ghost {
-      position: fixed;
-      z-index: 999;
-      pointer-events: none;
-      border-radius: 14px;
-      background: var(--white);
-      box-shadow: 0 10px 28px rgba(60, 140, 60, 0.22);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 14px;
+      position: fixed; z-index: 999; pointer-events: none;
+      border-radius: 14px; background: var(--white);
+      box-shadow: 0 10px 28px rgba(60,140,60,.22);
+      display: flex; align-items: center; gap: 8px; padding: 12px 14px;
       transform: scale(1.03);
     }
 
     /* Empty state */
-    .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
-    .empty-state p { font-size: 14px; margin-top: 10px; }
+    .empty-state { text-align: center; padding: 32px 20px; color: var(--tm); }
+    .empty-state p { font-size: 14px; margin-top: 8px; }
 
     /* Add area */
     .add-area {
-      margin-top: 20px;
-      background: var(--white);
-      border-radius: 16px;
-      padding: 4px 4px 4px 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 1px 4px var(--shadow);
-      border: 1.5px solid transparent;
-      transition: border-color 0.2s;
+      margin-top: 20px; background: var(--white); border-radius: 16px;
+      padding: 4px 4px 4px 14px; display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 1px 4px var(--shadow); border: 1.5px solid transparent;
+      transition: border-color .2s;
     }
-
-    .add-area:focus-within { border-color: var(--green-400); }
-
+    .add-area:focus-within { border-color: var(--g400); }
     .add-input {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 15px;
-      color: var(--text-primary);
-      background: transparent;
-      padding: 12px 0;
-      font-family: inherit;
+      flex: 1; border: none; outline: none; font-size: 15px;
+      color: var(--tp); background: transparent; padding: 12px 0; font-family: inherit;
     }
-
-    .add-input::placeholder { color: var(--text-muted); }
-
+    .add-input::placeholder { color: var(--tm); }
     .add-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: var(--green-500);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      flex-shrink: 0;
-      transition: background 0.15s, transform 0.1s;
+      width: 40px; height: 40px; border-radius: 12px; background: var(--g500);
+      border: none; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; transition: background .15s, transform .1s;
       -webkit-appearance: none;
     }
+    .add-btn:active { background: var(--g600); transform: scale(.95); }
 
-    .add-btn:active { background: var(--green-600); transform: scale(0.95); }
-
-    /* Tag selector row */
-    .tag-row {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-      padding: 8px 2px 0;
+    /* Tag selector */
+    .tag-row { display: flex; gap: 6px; align-items: center; padding: 8px 2px 0; }
+    .tag-row-label { font-size: 11px; color: var(--tm); flex-shrink: 0; }
+    .tag-sel-btn {
+      font-size: 11px; font-weight: 700; padding: 4px 11px;
+      border-radius: 100px; border: 1.5px solid var(--g200);
+      cursor: pointer; background: transparent; color: var(--tm);
+      transition: all .15s; -webkit-appearance: none; font-family: inherit;
     }
+    .tag-sel-btn[data-tag="朝"].active  { background: #fff3e0; color: #bf5a00; border-color: #e65100; }
+    .tag-sel-btn[data-tag="昼"].active  { background: #e3f2fd; color: #1255a0; border-color: #1976d2; }
+    .tag-sel-btn[data-tag="夜"].active  { background: #ede7f6; color: #4527a0; border-color: #7e57c2; }
 
-    .tag-row-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      flex-shrink: 0;
-    }
-
-    .tag-btn {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 11px;
-      border-radius: 100px;
-      border: 1.5px solid var(--green-200);
-      cursor: pointer;
-      background: transparent;
-      color: var(--text-muted);
-      transition: all 0.15s;
-      -webkit-appearance: none;
-      font-family: inherit;
-    }
-
-    .tag-btn[data-tag="朝"].active  { background: #fff3e0; color: #bf5a00; border-color: #e65100; }
-    .tag-btn[data-tag="昼"].active  { background: #e3f2fd; color: #1255a0; border-color: #1976d2; }
-    .tag-btn[data-tag="夜"].active  { background: #ede7f6; color: #4527a0; border-color: #7e57c2; }
-
-    /* Reset button */
+    /* Reset */
     .reset-btn {
-      display: block;
-      width: 100%;
-      margin-top: 16px;
-      padding: 13px;
-      background: transparent;
-      border: 1.5px solid var(--green-300);
-      border-radius: 14px;
-      font-size: 14px;
-      color: var(--text-secondary);
-      cursor: pointer;
-      font-family: inherit;
-      transition: background 0.15s;
-      -webkit-appearance: none;
+      display: block; width: 100%; margin-top: 16px; padding: 13px;
+      background: transparent; border: 1.5px solid var(--g300); border-radius: 14px;
+      font-size: 14px; color: var(--ts); cursor: pointer; font-family: inherit;
+      transition: background .15s; -webkit-appearance: none;
     }
-
-    .reset-btn:active { background: var(--green-200); }
+    .reset-btn:active { background: var(--g200); }
 
     /* All-done banner */
     .all-done-banner {
-      background: linear-gradient(135deg, var(--green-400), var(--green-500));
-      color: white;
-      border-radius: 16px;
-      padding: 18px 20px;
-      text-align: center;
-      margin-bottom: 12px;
-      animation: fadeIn 0.4s ease;
+      background: linear-gradient(135deg, var(--g400), var(--g500));
+      color: white; border-radius: 16px; padding: 18px 20px;
+      text-align: center; margin-bottom: 12px; animation: fadeIn .4s ease;
     }
-
-    .all-done-banner .emoji { font-size: 28px; display: block; margin-bottom: 4px; }
-    .all-done-banner p { font-size: 15px; font-weight: 600; }
+    .all-done-banner .em { font-size: 28px; display: block; margin-bottom: 4px; }
+    .all-done-banner p   { font-size: 15px; font-weight: 600; }
 
     /* Confetti canvas */
     #confettiCanvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 1000;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 1000;
     }
 
     @keyframes fadeIn {
@@ -411,7 +240,6 @@
   </style>
 
   <script>
-    // ホーム画面アイコンをCanvasで生成（iOS対応）
     (function(){
       var c = document.createElement('canvas');
       c.width = c.height = 180;
@@ -420,31 +248,23 @@
       g.addColorStop(0,'#7bbf7b'); g.addColorStop(1,'#3d8b3d');
       ctx.fillStyle = g; ctx.fillRect(0,0,180,180);
       function rr(x,y,w,h,r){
-        ctx.beginPath();
-        ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
-        ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-        ctx.lineTo(x+w,y+h-r);
-        ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-        ctx.lineTo(x+r,y+h);
-        ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-        ctx.lineTo(x,y+r);
-        ctx.quadraticCurveTo(x,y,x+r,y);
-        ctx.closePath();
+        ctx.beginPath(); ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
+        ctx.quadraticCurveTo(x+w,y,x+w,y+r); ctx.lineTo(x+w,y+h-r);
+        ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h); ctx.lineTo(x+r,y+h);
+        ctx.quadraticCurveTo(x,y+h,x,y+h-r); ctx.lineTo(x,y+r);
+        ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath();
       }
-      function check(cy, alpha){
+      function check(cy,alpha){
         ctx.beginPath(); ctx.arc(54,cy,15,0,Math.PI*2);
         ctx.fillStyle='rgba(255,255,255,'+alpha+')'; ctx.fill();
         ctx.beginPath(); ctx.moveTo(45,cy); ctx.lineTo(51,cy+7); ctx.lineTo(64,cy-9);
-        ctx.strokeStyle='#5aa55a'; ctx.lineWidth=4;
-        ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
-        ctx.fillStyle='rgba(255,255,255,'+alpha+')';
-        rr(80,cy-7,58,13,6.5); ctx.fill();
+        ctx.strokeStyle='#5aa55a'; ctx.lineWidth=4; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
+        ctx.fillStyle='rgba(255,255,255,'+alpha+')'; rr(80,cy-7,58,13,6.5); ctx.fill();
       }
       ctx.beginPath(); ctx.arc(54,58,15,0,Math.PI*2);
       ctx.strokeStyle='rgba(255,255,255,0.45)'; ctx.lineWidth=3.5; ctx.stroke();
       ctx.fillStyle='rgba(255,255,255,0.45)'; rr(80,51,58,13,6.5); ctx.fill();
-      check(90, 1);
-      check(122, 0.85);
+      check(90,1); check(122,0.85);
       var l = document.createElement('link');
       l.rel='apple-touch-icon'; l.href=c.toDataURL('image/png');
       document.head.appendChild(l);
@@ -460,30 +280,31 @@
     <span class="title">🌿 ルーティーン</span>
     <span class="date" id="dateLabel"></span>
   </div>
-  <div class="progress-bar-wrap">
-    <div class="progress-bar" id="progressBar" style="width:0%"></div>
+  <div class="pbar-wrap">
+    <div class="pbar" id="progressBar" style="width:0%"></div>
   </div>
-  <div class="progress-label">
-    <span class="progress-text" id="progressText">今日のルーティーン</span>
-    <span class="progress-count" id="progressCount">0 / 0</span>
+  <div class="pbar-label">
+    <span class="pbar-text"  id="progressText">今日のルーティーン</span>
+    <span class="pbar-count" id="progressCount">0 / 0</span>
   </div>
 </div>
 
 <div class="main">
   <div id="allDoneBanner" style="display:none">
     <div class="all-done-banner">
-      <span class="emoji">🎉</span>
+      <span class="em">🎉</span>
       <p>全て完了！お疲れさまでした</p>
     </div>
   </div>
 
   <div class="section-label">達成ログ</div>
-  <div class="log-container">
+  <div class="log-box">
     <div class="log-scroll" id="logScroll"></div>
   </div>
 
-  <div class="section-label" style="margin-top:16px">タスク
-    <span style="font-size:10px;font-weight:400;color:var(--text-muted);margin-left:6px;text-transform:none;letter-spacing:0">長押しで名前を編集</span>
+  <div class="section-label" style="margin-top:16px">
+    タスク
+    <span style="font-size:10px;font-weight:400;color:var(--tm);margin-left:6px;text-transform:none;letter-spacing:0">タグをタップで移動 / 長押しで編集</span>
   </div>
   <div class="task-list" id="taskList"></div>
 
@@ -499,497 +320,373 @@
 
   <div class="tag-row">
     <span class="tag-row-label">時間帯</span>
-    <button class="tag-btn" data-tag="朝">朝</button>
-    <button class="tag-btn" data-tag="昼">昼</button>
-    <button class="tag-btn" data-tag="夜">夜</button>
+    <button class="tag-sel-btn" data-tag="朝">朝</button>
+    <button class="tag-sel-btn" data-tag="昼">昼</button>
+    <button class="tag-sel-btn" data-tag="夜">夜</button>
   </div>
 
   <button class="reset-btn" id="resetBtn">チェックをリセット</button>
 </div>
 
 <script>
-  // ─────────────────────────────────────────
-  //  Storage keys
-  // ─────────────────────────────────────────
   const STATE_KEY = 'routine_v1';
   const LOG_KEY   = 'routine_logs_v1';
 
-  // ─────────────────────────────────────────
-  //  Utilities
-  // ─────────────────────────────────────────
-  function todayStr() {
-    return new Date().toLocaleDateString('ja-JP');
+  const SECTIONS = [
+    { tag: '朝', label: '☀️ 朝',  cls: 'asa'  },
+    { tag: '昼', label: '🌤 昼',  cls: 'hiru' },
+    { tag: '夜', label: '🌙 夜',  cls: 'yoru' },
+    { tag: null, label: '· その他', cls: 'none' },
+  ];
+
+  function todayStr() { return new Date().toLocaleDateString('ja-JP'); }
+  function uid()      { return Math.random().toString(36).slice(2,9); }
+  function esc(s)     { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function tagCls(tag){ return tag==='朝'?'asa':tag==='昼'?'hiru':tag==='夜'?'yoru':'none'; }
+
+  /* ── Logs ── */
+  function loadLogs(){ try{ return JSON.parse(localStorage.getItem(LOG_KEY))||{}; }catch{ return {}; } }
+  function saveLogs(l){ localStorage.setItem(LOG_KEY, JSON.stringify(l)); }
+  function recordLog(){
+    const total=state.tasks.length; if(!total) return;
+    const done=state.tasks.filter(t=>t.done).length;
+    const l=loadLogs(); l[todayStr()]={done,total}; saveLogs(l);
   }
 
-  function uid() {
-    return Math.random().toString(36).slice(2, 9);
+  /* ── State ── */
+  function defaultState(){
+    return { date: todayStr(), tasks:[
+      { id:uid(), name:'朝の準備',       done:false, tag:'朝' },
+      { id:uid(), name:'運動・ストレッチ', done:false, tag:null },
+      { id:uid(), name:'水を飲む',        done:false, tag:null },
+    ]};
   }
 
-  function esc(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  function tagClass(tag) {
-    if (tag === '朝') return 'asa';
-    if (tag === '昼') return 'hiru';
-    if (tag === '夜') return 'yoru';
-    return '';
-  }
-
-  // ─────────────────────────────────────────
-  //  Log storage
-  // ─────────────────────────────────────────
-  function loadLogs() {
-    try { return JSON.parse(localStorage.getItem(LOG_KEY)) || {}; }
-    catch { return {}; }
-  }
-
-  function saveLogs(logs) {
-    localStorage.setItem(LOG_KEY, JSON.stringify(logs));
-  }
-
-  function recordTodayLog() {
-    const total = state.tasks.length;
-    if (total === 0) return;
-    const done = state.tasks.filter(t => t.done).length;
-    const logs = loadLogs();
-    logs[todayStr()] = { done, total };
-    saveLogs(logs);
-  }
-
-  // ─────────────────────────────────────────
-  //  App state
-  // ─────────────────────────────────────────
-  function defaultState() {
-    return {
-      date: todayStr(),
-      tasks: [
-        { id: uid(), name: '朝の準備',      done: false, tag: '朝' },
-        { id: uid(), name: '運動・ストレッチ', done: false, tag: null },
-        { id: uid(), name: '水を飲む',       done: false, tag: null },
-      ]
-    };
-  }
-
-  function loadState() {
-    try {
-      const raw = localStorage.getItem(STATE_KEY);
-      if (!raw) return defaultState();
-      const s = JSON.parse(raw);
-      if (s.date !== todayStr()) {
-        const logs = loadLogs();
-        const done = s.tasks.filter(t => t.done).length;
-        if (s.tasks.length > 0) logs[s.date] = { done, total: s.tasks.length };
-        saveLogs(logs);
-        s.tasks = s.tasks.map(t => ({ ...t, done: false }));
-        s.date  = todayStr();
+  function loadState(){
+    try{
+      const raw=localStorage.getItem(STATE_KEY);
+      if(!raw) return defaultState();
+      const s=JSON.parse(raw);
+      if(s.date!==todayStr()){
+        const l=loadLogs(), done=s.tasks.filter(t=>t.done).length;
+        if(s.tasks.length) l[s.date]={done,total:s.tasks.length};
+        saveLogs(l);
+        s.tasks=s.tasks.map(t=>({...t,done:false}));
+        s.date=todayStr();
       }
-      // Backward compat: ensure tag field exists
-      s.tasks = s.tasks.map(t => ({ tag: null, ...t }));
+      s.tasks=s.tasks.map(t=>({ tag:null, ...t }));
       return s;
-    } catch {
-      return defaultState();
-    }
+    }catch{ return defaultState(); }
   }
 
-  function saveState() {
-    localStorage.setItem(STATE_KEY, JSON.stringify(state));
-  }
+  function saveState(){ localStorage.setItem(STATE_KEY, JSON.stringify(state)); }
 
   let state = loadState();
 
-  // ─────────────────────────────────────────
-  //  Confetti
-  // ─────────────────────────────────────────
+  /* ── Confetti ── */
   let confettiShown = false;
 
-  function launchConfetti() {
-    const canvas = document.getElementById('confettiCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const colors = ['#5aa55a','#7bbf7b','#a8d5a8','#ffd700','#ff8a65','#4db6ac','#ba68c8','#f06292'];
-    const particles = Array.from({ length: 80 }, () => ({
-      x: Math.random() * canvas.width,
-      y: -20 - Math.random() * canvas.height * 0.4,
-      vy: 1.8 + Math.random() * 3,
-      vx: (Math.random() - 0.5) * 2.5,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      w: 6 + Math.random() * 8,
-      h: 4 + Math.random() * 5,
-      rotation: Math.random() * Math.PI * 2,
-      rotSpeed: (Math.random() - 0.5) * 0.18
+  function launchConfetti(){
+    const canvas=document.getElementById('confettiCanvas');
+    const ctx=canvas.getContext('2d');
+    canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+    const colors=['#5aa55a','#7bbf7b','#a8d5a8','#ffd700','#ff8a65','#4db6ac','#ba68c8','#f06292'];
+    const pts=Array.from({length:80},()=>({
+      x:Math.random()*canvas.width, y:-20-Math.random()*canvas.height*.4,
+      vy:1.8+Math.random()*3, vx:(Math.random()-.5)*2.5,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      w:6+Math.random()*8, h:4+Math.random()*5,
+      rot:Math.random()*Math.PI*2, rs:(Math.random()-.5)*.18
     }));
-
-    let frame = 0;
-    const maxFrames = 160;
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.rotation += p.rotSpeed;
-        p.vy += 0.04;
-        const alpha = frame > 110 ? 1 - (frame - 110) / 50 : 1;
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rotation);
-        ctx.globalAlpha = Math.max(0, alpha);
-        ctx.fillStyle = p.color;
-        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-        ctx.restore();
+    let frame=0;
+    (function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pts.forEach(p=>{
+        p.x+=p.vx; p.y+=p.vy; p.rot+=p.rs; p.vy+=.04;
+        const a=frame>110?Math.max(0,1-(frame-110)/50):1;
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+        ctx.globalAlpha=a; ctx.fillStyle=p.color;
+        ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
       });
       frame++;
-      if (frame < maxFrames) requestAnimationFrame(animate);
-      else ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-    animate();
+      if(frame<160) requestAnimationFrame(animate);
+      else ctx.clearRect(0,0,canvas.width,canvas.height);
+    })();
   }
 
-  // ─────────────────────────────────────────
-  //  Render
-  // ─────────────────────────────────────────
-  function render() {
-    saveState();
-    recordTodayLog();
-    renderDate();
-    renderProgress();
-    renderLogs();
-    renderTasks();
+  /* ── Render ── */
+  function render(){
+    saveState(); recordLog();
+    renderDate(); renderProgress(); renderLogs(); renderTasks();
   }
 
-  function renderDate() {
-    document.getElementById('dateLabel').textContent =
-      new Date().toLocaleDateString('ja-JP', { month:'long', day:'numeric', weekday:'short' });
+  function renderDate(){
+    document.getElementById('dateLabel').textContent=
+      new Date().toLocaleDateString('ja-JP',{month:'long',day:'numeric',weekday:'short'});
   }
 
-  function renderProgress() {
-    const total = state.tasks.length;
-    const done  = state.tasks.filter(t => t.done).length;
-    const pct   = total === 0 ? 0 : Math.round(done / total * 100);
-    document.getElementById('progressBar').style.width   = pct + '%';
-    document.getElementById('progressCount').textContent = `${done} / ${total}`;
-    document.getElementById('progressText').textContent  = pct === 100 ? '全て完了！' : '今日のルーティーン';
-
-    const allDone = total > 0 && done === total;
-    document.getElementById('allDoneBanner').style.display = allDone ? 'block' : 'none';
-
-    if (allDone && !confettiShown) {
-      confettiShown = true;
-      setTimeout(launchConfetti, 300);
-    } else if (!allDone) {
-      confettiShown = false;
-    }
+  function renderProgress(){
+    const total=state.tasks.length, done=state.tasks.filter(t=>t.done).length;
+    const pct=total===0?0:Math.round(done/total*100);
+    document.getElementById('progressBar').style.width=pct+'%';
+    document.getElementById('progressCount').textContent=`${done} / ${total}`;
+    document.getElementById('progressText').textContent=pct===100?'全て完了！':'今日のルーティーン';
+    const allDone=total>0&&done===total;
+    document.getElementById('allDoneBanner').style.display=allDone?'block':'none';
+    if(allDone&&!confettiShown){ confettiShown=true; setTimeout(launchConfetti,300); }
+    else if(!allDone) confettiShown=false;
   }
 
-  function renderLogs() {
-    const logs   = loadLogs();
-    const scroll = document.getElementById('logScroll');
-    scroll.innerHTML = '';
-
-    const today    = new Date();
-    const DAYS     = 5;
-    const WEEKDAYS = ['日','月','火','水','木','金','土'];
-
-    for (let i = DAYS - 1; i >= 0; i--) {
-      const d = new Date(today);
-      d.setDate(d.getDate() - i);
-      const dateKey = d.toLocaleDateString('ja-JP');
-      const log     = logs[dateKey];
-      const isToday = i === 0;
-
-      let lvClass = '';
-      if (log && log.total > 0) {
-        const ratio = log.done / log.total;
-        if      (ratio === 0)  lvClass = 'lv0';
-        else if (ratio < 0.25) lvClass = 'lv1';
-        else if (ratio < 0.5)  lvClass = 'lv2';
-        else if (ratio < 1)    lvClass = 'lv3';
-        else                   lvClass = 'lv4';
+  function renderLogs(){
+    const logs=loadLogs(), scroll=document.getElementById('logScroll');
+    scroll.innerHTML='';
+    const today=new Date(), WD=['日','月','火','水','木','金','土'];
+    for(let i=4;i>=0;i--){
+      const d=new Date(today); d.setDate(d.getDate()-i);
+      const key=d.toLocaleDateString('ja-JP'), log=logs[key];
+      let lv='';
+      if(log&&log.total>0){
+        const r=log.done/log.total;
+        lv=r===0?'lv0':r<.25?'lv1':r<.5?'lv2':r<1?'lv3':'lv4';
       }
-
-      const cell = document.createElement('div');
-      cell.className = 'log-day' + (isToday ? ' today' : '');
-      cell.innerHTML = `
-        <span class="log-day-num">${d.getDate()}</span>
-        <div class="log-circle ${lvClass}" title="${log ? log.done + '/' + log.total : ''}"></div>
-        <span class="log-weekday">${WEEKDAYS[d.getDay()]}</span>
-      `;
+      const cell=document.createElement('div');
+      cell.className='log-day'+(i===0?' today':'');
+      cell.innerHTML=`<span class="log-n">${d.getDate()}</span><div class="log-c ${lv}"></div><span class="log-w">${WD[d.getDay()]}</span>`;
       scroll.appendChild(cell);
     }
-
-    scroll.scrollLeft = scroll.scrollWidth;
+    scroll.scrollLeft=scroll.scrollWidth;
   }
 
-  function renderTasks() {
-    const list = document.getElementById('taskList');
-    list.innerHTML = '';
+  function renderTasks(){
+    const list=document.getElementById('taskList');
+    list.innerHTML='';
 
-    if (state.tasks.length === 0) {
-      list.innerHTML = `
-        <div class="empty-state">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <circle cx="20" cy="20" r="18" stroke="#a8d5a8" stroke-width="2"/>
-            <path d="M13 20h14M20 13v14" stroke="#a8d5a8" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <p>タスクを追加してください</p>
-        </div>`;
+    if(state.tasks.length===0){
+      list.innerHTML=`<div class="empty-state">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="18" stroke="#a8d5a8" stroke-width="2"/>
+          <path d="M13 20h14M20 13v14" stroke="#a8d5a8" stroke-width="2" stroke-linecap="round"/>
+        </svg><p>タスクを追加してください</p></div>`;
       return;
     }
 
-    state.tasks.forEach(task => {
-      const el = document.createElement('div');
-      el.className  = 'task-item' + (task.done ? ' done' : '');
-      el.dataset.id = task.id;
+    SECTIONS.forEach(sec=>{
+      const tasks=state.tasks.filter(t=>t.tag===sec.tag);
+      if(tasks.length===0) return;
 
-      const tagHtml = task.tag
-        ? `<span class="time-tag ${tagClass(task.tag)}">${task.tag}</span>`
-        : '';
+      // Section header
+      const hdr=document.createElement('div');
+      hdr.className='time-section-header';
+      hdr.innerHTML=`<span>${sec.label}</span><span class="sec-count">${tasks.filter(t=>!t.done).length}/${tasks.length}</span>`;
+      list.appendChild(hdr);
 
-      el.innerHTML = `
-        <div class="drag-handle" data-drag="${task.id}" aria-label="並び替え">
-          <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
-            <rect y="0"  width="16" height="2" rx="1" fill="currentColor"/>
-            <rect y="5"  width="16" height="2" rx="1" fill="currentColor"/>
-            <rect y="10" width="16" height="2" rx="1" fill="currentColor"/>
-          </svg>
-        </div>
-        ${tagHtml}
-        <span class="task-name">${esc(task.name)}</span>
-        <button class="check-btn ${task.done ? 'checked' : ''}" data-check="${task.id}" aria-label="完了">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-        <button class="delete-btn" data-del="${task.id}" aria-label="削除">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </button>
-      `;
+      tasks.forEach(task=>{
+        const el=document.createElement('div');
+        el.className='task-item'+(task.done?' done':'');
+        el.dataset.id=task.id;
+        el.innerHTML=`
+          <div class="drag-handle" data-drag="${task.id}" aria-label="並び替え">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+              <rect y="0"  width="16" height="2" rx="1" fill="currentColor"/>
+              <rect y="5"  width="16" height="2" rx="1" fill="currentColor"/>
+              <rect y="10" width="16" height="2" rx="1" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="time-tag ${tagCls(task.tag)}" data-tag-btn="${task.id}">${task.tag||'＋'}</span>
+          <span class="task-name">${esc(task.name)}</span>
+          <button class="check-btn ${task.done?'checked':''}" data-check="${task.id}" aria-label="完了">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="del-btn" data-del="${task.id}" aria-label="削除">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </button>`;
 
-      list.appendChild(el);
+        list.appendChild(el);
 
-      // Bind check / delete
-      el.querySelector('[data-check]').addEventListener('click', () => toggleTask(task.id));
-      el.querySelector('[data-del]').addEventListener('click', () => deleteTask(task.id));
+        el.querySelector('[data-check]').addEventListener('click', ()=>toggleTask(task.id));
+        el.querySelector('[data-del]').addEventListener('click',   ()=>deleteTask(task.id));
+        el.querySelector('[data-drag]').addEventListener('touchstart', onDragStart, {passive:false});
+        el.querySelector('[data-tag-btn]').addEventListener('click', e=>{ e.stopPropagation(); showTagPicker(task.id, e.currentTarget); });
 
-      // Bind drag
-      el.querySelector('[data-drag]').addEventListener('touchstart', onDragStart, { passive: false });
-
-      // Long press to edit (on name area, not buttons/handle)
-      let pressTimer = null;
-      el.addEventListener('touchstart', e => {
-        if (e.target.closest('[data-check],[data-del],[data-drag]')) return;
-        pressTimer = setTimeout(() => startEdit(task.id), 600);
-      }, { passive: true });
-      el.addEventListener('touchend',   () => clearTimeout(pressTimer));
-      el.addEventListener('touchmove',  () => clearTimeout(pressTimer));
-      el.addEventListener('touchcancel',() => clearTimeout(pressTimer));
+        // Long press to edit name
+        let pressTimer=null;
+        el.addEventListener('touchstart', e=>{
+          if(e.target.closest('[data-check],[data-del],[data-drag],[data-tag-btn]')) return;
+          pressTimer=setTimeout(()=>startEdit(task.id),600);
+        },{passive:true});
+        el.addEventListener('touchend',    ()=>clearTimeout(pressTimer));
+        el.addEventListener('touchmove',   ()=>clearTimeout(pressTimer));
+        el.addEventListener('touchcancel', ()=>clearTimeout(pressTimer));
+      });
     });
   }
 
-  // ─────────────────────────────────────────
-  //  Inline edit (long press)
-  // ─────────────────────────────────────────
-  function startEdit(id) {
-    const t = state.tasks.find(t => t.id === id);
-    if (!t) return;
-    const el = document.querySelector(`.task-item[data-id="${id}"]`);
-    if (!el) return;
-    const nameSpan = el.querySelector('.task-name');
-    if (!nameSpan) return;
+  /* ── Tag picker ── */
+  function showTagPicker(taskId, anchorEl){
+    // Remove existing
+    document.querySelectorAll('.tag-picker,.picker-overlay').forEach(el=>el.remove());
 
-    // Vibrate feedback (if supported)
-    if (navigator.vibrate) navigator.vibrate(40);
+    const overlay=document.createElement('div');
+    overlay.className='picker-overlay';
+    document.body.appendChild(overlay);
 
-    const input = document.createElement('input');
-    input.className = 'task-name-input';
-    input.value = t.name;
-    nameSpan.replaceWith(input);
-    input.focus();
-    input.select();
+    const picker=document.createElement('div');
+    picker.className='tag-picker';
+    picker.innerHTML=`
+      <button class="tp-btn asa"  data-pick="朝">☀️ 朝</button>
+      <button class="tp-btn hiru" data-pick="昼">🌤 昼</button>
+      <button class="tp-btn yoru" data-pick="夜">🌙 夜</button>
+      <button class="tp-btn none" data-pick="">なし</button>`;
 
-    function save() {
-      const newName = input.value.trim();
-      if (newName) t.name = newName;
-      render();
-    }
+    const rect=anchorEl.getBoundingClientRect();
+    picker.style.top =(rect.bottom+6)+'px';
+    picker.style.left=Math.min(rect.left, window.innerWidth-220)+'px';
+    document.body.appendChild(picker);
 
+    function close(){ picker.remove(); overlay.remove(); }
+
+    picker.addEventListener('click', e=>{
+      const btn=e.target.closest('[data-pick]');
+      if(!btn) return;
+      const t=state.tasks.find(t=>t.id===taskId);
+      if(t) t.tag=btn.dataset.pick||null;
+      close(); render();
+    });
+
+    overlay.addEventListener('click', close);
+  }
+
+  /* ── Inline edit ── */
+  function startEdit(id){
+    const t=state.tasks.find(t=>t.id===id);
+    if(!t) return;
+    const el=document.querySelector(`.task-item[data-id="${id}"]`);
+    if(!el) return;
+    const span=el.querySelector('.task-name');
+    if(!span) return;
+    if(navigator.vibrate) navigator.vibrate(40);
+    const input=document.createElement('input');
+    input.className='task-name-input';
+    input.value=t.name;
+    span.replaceWith(input);
+    input.focus(); input.select();
+    function save(){ const n=input.value.trim(); if(n) t.name=n; render(); }
     input.addEventListener('blur', save);
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter')  { e.preventDefault(); input.blur(); }
-      if (e.key === 'Escape') { input.value = t.name; input.blur(); }
+    input.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){ e.preventDefault(); input.blur(); }
+      if(e.key==='Escape'){ input.value=t.name; input.blur(); }
     });
   }
 
-  // ─────────────────────────────────────────
-  //  Actions
-  // ─────────────────────────────────────────
-  function toggleTask(id) {
-    const t = state.tasks.find(t => t.id === id);
-    if (t) t.done = !t.done;
+  /* ── Actions ── */
+  function toggleTask(id){ const t=state.tasks.find(t=>t.id===id); if(t) t.done=!t.done; render(); }
+  function deleteTask(id){ state.tasks=state.tasks.filter(t=>t.id!==id); render(); }
+
+  let selectedTag=null;
+
+  function addTask(name){
+    name=name.trim(); if(!name) return;
+    state.tasks.push({id:uid(), name, done:false, tag:selectedTag});
+    selectedTag=null;
+    document.querySelectorAll('.tag-sel-btn').forEach(b=>b.classList.remove('active'));
     render();
   }
 
-  function deleteTask(id) {
-    state.tasks = state.tasks.filter(t => t.id !== id);
-    render();
-  }
+  /* ── Drag & Drop ── */
+  let drag=null;
 
-  let selectedTag = null;
-
-  function addTask(name) {
-    name = name.trim();
-    if (!name) return;
-    state.tasks.push({ id: uid(), name, done: false, tag: selectedTag });
-    // Reset tag selection
-    selectedTag = null;
-    document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
-    render();
-  }
-
-  // ─────────────────────────────────────────
-  //  Drag & Drop (touch)
-  // ─────────────────────────────────────────
-  let drag = null;
-
-  function onDragStart(e) {
+  function onDragStart(e){
     e.preventDefault();
-    const taskId  = e.currentTarget.dataset.drag;
-    const fromIdx = state.tasks.findIndex(t => t.id === taskId);
-    if (fromIdx < 0) return;
+    const taskId=e.currentTarget.dataset.drag;
+    const allItems=[...document.getElementById('taskList').querySelectorAll('.task-item[data-id]')];
+    const fromIdx=allItems.findIndex(el=>el.dataset.id===taskId);
+    if(fromIdx<0) return;
+    const srcEl=allItems[fromIdx], srcRect=srcEl.getBoundingClientRect();
+    const touchY=e.touches[0].clientY;
 
-    const list     = document.getElementById('taskList');
-    const allItems = [...list.querySelectorAll('.task-item[data-id]')];
-    const srcEl    = allItems[fromIdx];
-    const srcRect  = srcEl.getBoundingClientRect();
-    const touchY   = e.touches[0].clientY;
-
-    const ghost = document.createElement('div');
-    ghost.className = 'task-ghost';
-    ghost.style.left  = srcRect.left + 'px';
-    ghost.style.top   = srcRect.top  + 'px';
-    ghost.style.width = srcRect.width + 'px';
-    ghost.innerHTML   = srcEl.innerHTML;
+    const ghost=document.createElement('div');
+    ghost.className='task-ghost';
+    ghost.style.cssText=`left:${srcRect.left}px;top:${srcRect.top}px;width:${srcRect.width}px`;
+    ghost.innerHTML=srcEl.innerHTML;
     document.body.appendChild(ghost);
-
     srcEl.classList.add('is-dragging');
 
-    const origRects = allItems.map(el => el.getBoundingClientRect());
-
-    drag = {
-      taskId, fromIdx,
-      ghost, srcEl, allItems, origRects,
-      touchOffsetY: touchY - srcRect.top,
-      toIdx: fromIdx,
-      itemH: srcRect.height + 8
-    };
+    const origRects=allItems.map(el=>el.getBoundingClientRect());
+    drag={taskId,fromIdx,ghost,srcEl,allItems,origRects,
+          touchOffsetY:touchY-srcRect.top,toIdx:fromIdx,itemH:srcRect.height+8};
   }
 
-  document.addEventListener('touchmove', e => {
-    if (!drag) return;
+  document.addEventListener('touchmove', e=>{
+    if(!drag) return;
     e.preventDefault();
+    const touchY=e.touches[0].clientY;
+    drag.ghost.style.top=(touchY-drag.touchOffsetY)+'px';
 
-    const touchY = e.touches[0].clientY;
-    drag.ghost.style.top = (touchY - drag.touchOffsetY) + 'px';
-
-    const nonSource = drag.allItems
-      .map((el, i) => ({ i, rect: drag.origRects[i] }))
-      .filter(x => x.i !== drag.fromIdx);
-
-    let toIdx = nonSource.length;
-    for (let j = 0; j < nonSource.length; j++) {
-      const mid = nonSource[j].rect.top + nonSource[j].rect.height / 2;
-      if (touchY < mid) { toIdx = j; break; }
+    const ns=drag.allItems.map((el,i)=>({i,rect:drag.origRects[i]})).filter(x=>x.i!==drag.fromIdx);
+    let toIdx=ns.length;
+    for(let j=0;j<ns.length;j++){
+      if(touchY<ns[j].rect.top+ns[j].rect.height/2){ toIdx=j; break; }
     }
-
-    if (toIdx !== drag.toIdx) {
-      drag.toIdx = toIdx;
-      applyDragTransforms();
-    }
-  }, { passive: false });
+    if(toIdx!==drag.toIdx){ drag.toIdx=toIdx; applyDragTransforms(); }
+  },{passive:false});
 
   document.addEventListener('touchend',    endDrag);
   document.addEventListener('touchcancel', endDrag);
 
-  function applyDragTransforms() {
-    if (!drag) return;
-    const { allItems, fromIdx, toIdx, itemH } = drag;
-
-    const ns = allItems
-      .map((el, i) => ({ el, i }))
-      .filter(x => x.i !== fromIdx);
-
-    ns.forEach(({ el }, j) => {
-      const s = ((j >= toIdx ? 1 : 0) - (j >= fromIdx ? 1 : 0)) * itemH;
-      el.style.transition = 'transform 0.18s ease';
-      el.style.transform  = s !== 0 ? `translateY(${s}px)` : '';
+  function applyDragTransforms(){
+    if(!drag) return;
+    const {allItems,fromIdx,toIdx,itemH}=drag;
+    allItems.map((el,i)=>({el,i})).filter(x=>x.i!==fromIdx).forEach(({el},j)=>{
+      const s=((j>=toIdx?1:0)-(j>=fromIdx?1:0))*itemH;
+      el.style.transition='transform .18s ease';
+      el.style.transform=s?`translateY(${s}px)`:'';
     });
   }
 
-  function endDrag() {
-    if (!drag) return;
-
-    drag.allItems.forEach(el => {
-      el.style.transform  = '';
-      el.style.transition = '';
-    });
+  function endDrag(){
+    if(!drag) return;
+    drag.allItems.forEach(el=>{ el.style.transform=''; el.style.transition=''; });
     drag.srcEl.classList.remove('is-dragging');
     drag.ghost.remove();
-
-    if (drag.toIdx !== drag.fromIdx) {
-      const tasks   = [...state.tasks];
-      const [moved] = tasks.splice(drag.fromIdx, 1);
-      tasks.splice(drag.toIdx, 0, moved);
-      state.tasks = tasks;
+    if(drag.toIdx!==drag.fromIdx){
+      const tasks=[...state.tasks];
+      // Map visual indices (task-items only) back to state.tasks indices
+      const allItems=drag.allItems;
+      const fromStateIdx=state.tasks.findIndex(t=>t.id===allItems[drag.fromIdx].dataset.id);
+      const toStateIdx  =state.tasks.findIndex(t=>t.id===allItems[
+        drag.toIdx < allItems.length ? drag.toIdx : allItems.length-1
+      ].dataset.id);
+      const [moved]=tasks.splice(fromStateIdx,1);
+      tasks.splice(toStateIdx,0,moved);
+      state.tasks=tasks;
       render();
     }
-
-    drag = null;
+    drag=null;
   }
 
-  // ─────────────────────────────────────────
-  //  Event listeners
-  // ─────────────────────────────────────────
-  document.getElementById('addBtn').addEventListener('click', () => {
-    const inp = document.getElementById('addInput');
-    addTask(inp.value);
-    inp.value = '';
-    inp.focus();
+  /* ── Events ── */
+  document.getElementById('addBtn').addEventListener('click',()=>{
+    const inp=document.getElementById('addInput');
+    addTask(inp.value); inp.value=''; inp.focus();
   });
-
-  document.getElementById('addInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      addTask(e.target.value);
-      e.target.value = '';
-    }
+  document.getElementById('addInput').addEventListener('keydown',e=>{
+    if(e.key==='Enter'){ addTask(e.target.value); e.target.value=''; }
   });
-
-  document.getElementById('resetBtn').addEventListener('click', () => {
-    state.tasks = state.tasks.map(t => ({ ...t, done: false }));
-    render();
+  document.getElementById('resetBtn').addEventListener('click',()=>{
+    state.tasks=state.tasks.map(t=>({...t,done:false})); render();
   });
-
-  document.querySelectorAll('.tag-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tag = btn.dataset.tag;
-      if (selectedTag === tag) {
-        selectedTag = null;
-        btn.classList.remove('active');
-      } else {
-        selectedTag = tag;
-        document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      }
+  document.querySelectorAll('.tag-sel-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const tag=btn.dataset.tag;
+      if(selectedTag===tag){ selectedTag=null; btn.classList.remove('active'); }
+      else{ selectedTag=tag; document.querySelectorAll('.tag-sel-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
     });
   });
 
-  // ─────────────────────────────────────────
-  //  Init
-  // ─────────────────────────────────────────
   render();
 </script>
 </body>
