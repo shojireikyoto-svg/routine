@@ -485,13 +485,11 @@
         el.className='task-item'+(task.done?' done':'');
         el.dataset.id=task.id;
         el.innerHTML=`
-          <div class="drag-handle" data-drag="${task.id}" aria-label="並び替え">
-            <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
-              <rect y="0"  width="16" height="2" rx="1" fill="currentColor"/>
-              <rect y="5"  width="16" height="2" rx="1" fill="currentColor"/>
-              <rect y="10" width="16" height="2" rx="1" fill="currentColor"/>
+          <button class="del-btn" data-del="${task.id}" aria-label="削除">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
-          </div>
+          </button>
           <span class="time-tag ${tagCls(task.tag)}" data-tag-btn="${task.id}">${task.tag||'＋'}</span>
           <span class="task-name">${esc(task.name)}</span>
           <button class="check-btn ${task.done?'checked':''}" data-check="${task.id}" aria-label="完了">
@@ -499,11 +497,13 @@
               <path d="M2 6l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
-          <button class="del-btn" data-del="${task.id}" aria-label="削除">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <div class="drag-handle" data-drag="${task.id}" aria-label="並び替え">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+              <rect y="0"  width="16" height="2" rx="1" fill="currentColor"/>
+              <rect y="5"  width="16" height="2" rx="1" fill="currentColor"/>
+              <rect y="10" width="16" height="2" rx="1" fill="currentColor"/>
             </svg>
-          </button>`;
+          </div>`;
 
         list.appendChild(el);
 
