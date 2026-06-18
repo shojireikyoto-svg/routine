@@ -4,18 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="ルーティーン">
-  <meta name="theme-color" content="#5aa55a">
+  <meta name="theme-color" content="#5aa55a" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#162016" media="(prefers-color-scheme: dark)">
   <title>ルーティーン</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     :root {
+      color-scheme: light dark;
       --g100: #f0f9f0; --g200: #d6efd6; --g300: #a8d5a8;
       --g400: #7bbf7b; --g500: #5aa55a; --g600: #3d8b3d;
       --tp: #2d4a2d; --ts: #5a7a5a; --tm: #8faa8f;
       --white: #ffffff; --shadow: rgba(90,165,90,0.15);
+      --tag-asa-bg:  #fff3e0; --tag-asa-c:  #bf5a00;
+      --tag-hiru-bg: #e3f2fd; --tag-hiru-c: #1255a0;
+      --tag-yoru-bg: #ede7f6; --tag-yoru-c: #4527a0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --g100:  #0f1a0f;
+        --g200:  #1c2e1c;
+        --g300:  #2e4a2e;
+        --g400:  #4a7a4a;
+        --g500:  #5aa55a;
+        --g600:  #7bbf7b;
+        --tp:    #dceadc;
+        --ts:    #8faa8f;
+        --tm:    #4e6e4e;
+        --white: #162016;
+        --shadow: rgba(0,0,0,0.4);
+        --tag-asa-bg:  #2e1c00; --tag-asa-c:  #ffb366;
+        --tag-hiru-bg: #001e3c; --tag-hiru-c: #64b0f4;
+        --tag-yoru-bg: #1a0e2e; --tag-yoru-c: #c49ef5;
+      }
     }
 
     body {
@@ -103,10 +127,10 @@
       transition: opacity .15s; letter-spacing: .2px;
     }
     .time-tag:active { opacity: .7; }
-    .time-tag.asa  { background: #fff3e0; color: #bf5a00; }
-    .time-tag.hiru { background: #e3f2fd; color: #1255a0; }
-    .time-tag.yoru { background: #ede7f6; color: #4527a0; }
-    .time-tag.none { background: var(--g100); color: var(--tm); border: 1.5px dashed var(--g300); }
+    .time-tag.asa  { background: var(--tag-asa-bg);  color: var(--tag-asa-c);  }
+    .time-tag.hiru { background: var(--tag-hiru-bg); color: var(--tag-hiru-c); }
+    .time-tag.yoru { background: var(--tag-yoru-bg); color: var(--tag-yoru-c); }
+    .time-tag.none { background: var(--g200); color: var(--tm); border: 1.5px dashed var(--g300); }
 
     .task-name {
       flex: 1; font-size: 15px; color: var(--tp);
@@ -154,10 +178,10 @@
       font-family: inherit; transition: opacity .1s; -webkit-appearance: none;
     }
     .tp-btn:active { opacity: .7; }
-    .tp-btn.asa  { background: #fff3e0; color: #bf5a00; }
-    .tp-btn.hiru { background: #e3f2fd; color: #1255a0; }
-    .tp-btn.yoru { background: #ede7f6; color: #4527a0; }
-    .tp-btn.none { background: var(--g100); color: var(--tm); }
+    .tp-btn.asa  { background: var(--tag-asa-bg);  color: var(--tag-asa-c);  }
+    .tp-btn.hiru { background: var(--tag-hiru-bg); color: var(--tag-hiru-c); }
+    .tp-btn.yoru { background: var(--tag-yoru-bg); color: var(--tag-yoru-c); }
+    .tp-btn.none { background: var(--g200); color: var(--tm); }
     .picker-overlay {
       position: fixed; inset: 0; z-index: 1999; background: transparent;
     }
@@ -205,9 +229,9 @@
       cursor: pointer; background: transparent; color: var(--tm);
       transition: all .15s; -webkit-appearance: none; font-family: inherit;
     }
-    .tag-sel-btn[data-tag="朝"].active  { background: #fff3e0; color: #bf5a00; border-color: #e65100; }
-    .tag-sel-btn[data-tag="昼"].active  { background: #e3f2fd; color: #1255a0; border-color: #1976d2; }
-    .tag-sel-btn[data-tag="夜"].active  { background: #ede7f6; color: #4527a0; border-color: #7e57c2; }
+    .tag-sel-btn[data-tag="朝"].active  { background: var(--tag-asa-bg);  color: var(--tag-asa-c);  border-color: var(--tag-asa-c);  }
+    .tag-sel-btn[data-tag="昼"].active  { background: var(--tag-hiru-bg); color: var(--tag-hiru-c); border-color: var(--tag-hiru-c); }
+    .tag-sel-btn[data-tag="夜"].active  { background: var(--tag-yoru-bg); color: var(--tag-yoru-c); border-color: var(--tag-yoru-c); }
 
     /* Reset */
     .reset-btn {
